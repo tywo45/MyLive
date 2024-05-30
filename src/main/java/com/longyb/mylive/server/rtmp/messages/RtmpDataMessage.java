@@ -22,6 +22,19 @@ import lombok.NoArgsConstructor;
 public class RtmpDataMessage extends RtmpMessage {
 	List<Object> data;
 
+	public RtmpDataMessage(List<Object> data) {
+		super();
+		this.data = data;
+	}
+
+	public List<Object> getData() {
+		return data;
+	}
+
+	public void setData(List<Object> data) {
+		this.data = data;
+	}
+
 	@Override
 	public ByteBuf encodePayload() {
 		ByteBuf buffer = Unpooled.buffer();

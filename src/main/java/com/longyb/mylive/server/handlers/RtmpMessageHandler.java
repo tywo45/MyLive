@@ -3,6 +3,10 @@ package com.longyb.mylive.server.handlers;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.longyb.mylive.amf.Amf0Object;
 import com.longyb.mylive.server.entities.Role;
 import com.longyb.mylive.server.entities.Stream;
@@ -34,6 +38,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class RtmpMessageHandler extends SimpleChannelInboundHandler<RtmpMessage> {
+	private static Logger log = LoggerFactory.getLogger(RtmpMessageHandler.class);
 
 	int ackWindowSize;
 	int lastSentbackSize;

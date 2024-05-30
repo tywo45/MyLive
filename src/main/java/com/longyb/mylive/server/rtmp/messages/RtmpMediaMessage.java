@@ -12,4 +12,20 @@ public abstract class RtmpMediaMessage  extends RtmpMessage{
 	Integer timestamp;
 	
 	public abstract byte[] raw() ;
+
+	public Integer getTimestampDelta() {
+		return timestampDelta;
+	}
+
+	public void setTimestampDelta(Integer timestampDelta) {
+		this.timestampDelta = timestampDelta;
+	}
+
+	public Integer getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Integer timestamp) {
+		this.timestamp = timestamp;
+	}
 }

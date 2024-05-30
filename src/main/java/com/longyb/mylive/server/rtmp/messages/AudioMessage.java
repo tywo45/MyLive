@@ -22,6 +22,21 @@ import lombok.ToString;
 public class AudioMessage extends RtmpMediaMessage {
 	byte[] audioData;
 
+	public AudioMessage(byte[] audioData) {
+		super();
+		this.audioData = audioData;
+	}
+	public AudioMessage() {
+		super();
+	}
+	public byte[] getAudioData() {
+		return audioData;
+	}
+
+	public void setAudioData(byte[] audioData) {
+		this.audioData = audioData;
+	}
+
 	@Override
 	public int getOutboundCsid() {
 		return 10;

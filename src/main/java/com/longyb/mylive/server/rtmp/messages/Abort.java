@@ -18,6 +18,11 @@ public class Abort extends RtmpControlMessage {
 
 	int csid;
 
+	public Abort(int csid) {
+		super();
+		this.csid = csid;
+	}
+
 	@Override
 	public ByteBuf encodePayload() {
 		return Unpooled.buffer(4).writeInt(csid);

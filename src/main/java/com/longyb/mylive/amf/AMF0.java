@@ -7,11 +7,15 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import io.netty.buffer.ByteBuf;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class AMF0 {
+	private static Logger log = LoggerFactory.getLogger(AMF0.class);
 
 	private AMF0() {
 	}

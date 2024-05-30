@@ -1,5 +1,8 @@
 package com.longyb.mylive.server.handlers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.longyb.mylive.server.rtmp.Constants;
 import com.longyb.mylive.server.rtmp.messages.AudioMessage;
 import com.longyb.mylive.server.rtmp.messages.RtmpMessage;
@@ -18,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 public class ChunkEncoder extends MessageToByteEncoder<RtmpMessage> {
-
+	private static Logger log = LoggerFactory.getLogger(ChunkEncoder.class);
 	int chunkSize = 128;
 	long timestampBegin = System.currentTimeMillis();
 

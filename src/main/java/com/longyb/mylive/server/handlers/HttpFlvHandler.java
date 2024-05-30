@@ -1,8 +1,15 @@
 package com.longyb.mylive.server.handlers;
 
+import static io.netty.handler.codec.http.HttpHeaderNames.ACCESS_CONTROL_ALLOW_HEADERS;
+import static io.netty.handler.codec.http.HttpHeaderNames.ACCESS_CONTROL_ALLOW_METHODS;
+import static io.netty.handler.codec.http.HttpHeaderNames.ACCESS_CONTROL_ALLOW_ORIGIN;
 import static io.netty.handler.codec.http.HttpHeaderNames.CONTENT_TYPE;
+import static io.netty.handler.codec.http.HttpHeaderNames.TRANSFER_ENCODING;
 
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Splitter;
 import com.longyb.mylive.server.entities.Stream;
@@ -23,13 +30,12 @@ import io.netty.handler.codec.http.HttpResponseStatus;
 import io.netty.handler.codec.http.HttpVersion;
 import lombok.extern.slf4j.Slf4j;
 
-import static io.netty.handler.codec.http.HttpHeaderNames.*;
-
 /**
  * @author longyubo 2020年1月7日 下午3:19:43
  **/
 @Slf4j
 public class HttpFlvHandler extends SimpleChannelInboundHandler<HttpObject> {
+	private static Logger log = LoggerFactory.getLogger(HttpFlvHandler.class);
 
 	StreamManager streamManager;
 

@@ -17,6 +17,11 @@ import lombok.NoArgsConstructor;
 public class Acknowledgement extends RtmpControlMessage {
 	int sequnceNumber;
 
+	public Acknowledgement(int sequnceNumber) {
+		super();
+		this.sequnceNumber = sequnceNumber;
+	}
+
 	@Override
 	public ByteBuf encodePayload() {
 		return Unpooled.buffer(4).writeInt(sequnceNumber);

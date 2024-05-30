@@ -36,6 +36,13 @@ public class StreamName {
 		return true;
 	}	 
 
+	public StreamName(String app, String name, boolean obsClient) {
+		super();
+		this.app = app;
+		this.name = name;
+		this.obsClient = obsClient;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -43,5 +50,29 @@ public class StreamName {
 		result = prime * result + ((app == null) ? 0 : app.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
+	}
+
+	public String getApp() {
+		return app;
+	}
+
+	public void setApp(String app) {
+		this.app = app;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public boolean isObsClient() {
+		return obsClient;
+	}
+
+	public void setObsClient(boolean obsClient) {
+		this.obsClient = obsClient;
 	}
 }

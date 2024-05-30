@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.longyb.mylive.amf.AMF0;
 import com.longyb.mylive.server.cfg.MyLiveConfig;
 import com.longyb.mylive.server.rtmp.Constants;
@@ -28,13 +31,13 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.handler.codec.http.DefaultLastHttpContent;
-import io.netty.util.ReferenceCountUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 @Data
 @Slf4j
 public class Stream {
+	private static Logger log = LoggerFactory.getLogger(Stream.class);
 
 	static byte[] flvHeader = new byte[] { 0x46, 0x4C, 0x56, 0x01, 0x05, 00, 00, 00, 0x09 };
 
@@ -69,6 +72,118 @@ public class Stream {
 		if (MyLiveConfig.INSTANCE.isSaveFlvFile()) {
 			createFileStream();
 		}
+	}
+
+	public static byte[] getFlvHeader() {
+		return flvHeader;
+	}
+
+	public static void setFlvHeader(byte[] flvHeader) {
+		Stream.flvHeader = flvHeader;
+	}
+
+	public Map<String, Object> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, Object> metadata) {
+		this.metadata = metadata;
+	}
+
+	public Channel getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(Channel publisher) {
+		this.publisher = publisher;
+	}
+
+	public VideoMessage getAvcDecoderConfigurationRecord() {
+		return avcDecoderConfigurationRecord;
+	}
+
+	public void setAvcDecoderConfigurationRecord(VideoMessage avcDecoderConfigurationRecord) {
+		this.avcDecoderConfigurationRecord = avcDecoderConfigurationRecord;
+	}
+
+	public AudioMessage getAacAudioSpecificConfig() {
+		return aacAudioSpecificConfig;
+	}
+
+	public void setAacAudioSpecificConfig(AudioMessage aacAudioSpecificConfig) {
+		this.aacAudioSpecificConfig = aacAudioSpecificConfig;
+	}
+
+	public Set<Channel> getSubscribers() {
+		return subscribers;
+	}
+
+	public void setSubscribers(Set<Channel> subscribers) {
+		this.subscribers = subscribers;
+	}
+
+	public List<RtmpMediaMessage> getContent() {
+		return content;
+	}
+
+	public void setContent(List<RtmpMediaMessage> content) {
+		this.content = content;
+	}
+
+	public StreamName getStreamName() {
+		return streamName;
+	}
+
+	public void setStreamName(StreamName streamName) {
+		this.streamName = streamName;
+	}
+
+	public int getVideoTimestamp() {
+		return videoTimestamp;
+	}
+
+	public void setVideoTimestamp(int videoTimestamp) {
+		this.videoTimestamp = videoTimestamp;
+	}
+
+	public int getAudioTimestamp() {
+		return audioTimestamp;
+	}
+
+	public void setAudioTimestamp(int audioTimestamp) {
+		this.audioTimestamp = audioTimestamp;
+	}
+
+	public int getObsTimeStamp() {
+		return obsTimeStamp;
+	}
+
+	public void setObsTimeStamp(int obsTimeStamp) {
+		this.obsTimeStamp = obsTimeStamp;
+	}
+
+	public FileOutputStream getFlvout() {
+		return flvout;
+	}
+
+	public void setFlvout(FileOutputStream flvout) {
+		this.flvout = flvout;
+	}
+
+	public boolean isFlvHeadAndMetadataWritten() {
+		return flvHeadAndMetadataWritten;
+	}
+
+	public void setFlvHeadAndMetadataWritten(boolean flvHeadAndMetadataWritten) {
+		this.flvHeadAndMetadataWritten = flvHeadAndMetadataWritten;
+	}
+
+	public Set<Channel> getHttpFLvSubscribers() {
+		return httpFLvSubscribers;
+	}
+
+	public void setHttpFLvSubscribers(Set<Channel> httpFLvSubscribers) {
+		this.httpFLvSubscribers = httpFLvSubscribers;
 	}
 
 	public synchronized void addContent(RtmpMediaMessage msg) {

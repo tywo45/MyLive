@@ -28,4 +28,10 @@ public class SetPeerBandwidth extends RtmpControlMessage {
 	public int getMsgType() {
 		return Constants.MSG_SET_PEER_BANDWIDTH;
 	}
+
+	public SetPeerBandwidth(int acknowledgementWindowSize, int limitType) {
+		super();
+		this.acknowledgementWindowSize = acknowledgementWindowSize;
+		this.limitType = limitType;
+	}
 }

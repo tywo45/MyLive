@@ -19,6 +19,13 @@ public class SetChunkSize extends RtmpControlMessage {
 
 	int chunkSize;
 
+	public SetChunkSize(int chunkSize) {
+		super();
+		this.chunkSize = chunkSize;
+	}
+	public SetChunkSize() {
+		super();
+	}
 	@Override
 	public ByteBuf encodePayload() {
 		return Unpooled.buffer(4).writeInt(chunkSize);
@@ -28,5 +35,13 @@ public class SetChunkSize extends RtmpControlMessage {
 	@Override
 	public int getMsgType() {
 		return Constants.MSG_SET_CHUNK_SIZE;
+	}
+
+	public int getChunkSize() {
+		return chunkSize;
+	}
+
+	public void setChunkSize(int chunkSize) {
+		this.chunkSize = chunkSize;
 	}
 }

@@ -31,4 +31,20 @@ public abstract class RtmpMessage {
 	
 	public abstract ByteBuf encodePayload();
 
+	public int getInboundHeaderLength() {
+		return inboundHeaderLength;
+	}
+
+	public void setInboundHeaderLength(int inboundHeaderLength) {
+		this.inboundHeaderLength = inboundHeaderLength;
+	}
+
+	public int getInboundBodyLength() {
+		return inboundBodyLength;
+	}
+
+	public void setInboundBodyLength(int inboundBodyLength) {
+		this.inboundBodyLength = inboundBodyLength;
+	}
+
 }

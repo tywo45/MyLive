@@ -1,13 +1,20 @@
 package com.longyb.mylive.server.handlers;
 
+import static com.longyb.mylive.server.rtmp.Constants.CHUNK_FMT_0;
+import static com.longyb.mylive.server.rtmp.Constants.CHUNK_FMT_1;
+import static com.longyb.mylive.server.rtmp.Constants.CHUNK_FMT_2;
+import static com.longyb.mylive.server.rtmp.Constants.CHUNK_FMT_3;
+import static com.longyb.mylive.server.rtmp.Constants.MAX_TIMESTAMP;
+
 import java.util.HashMap;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.longyb.mylive.server.rtmp.RtmpMessageDecoder;
 import com.longyb.mylive.server.rtmp.messages.RtmpMessage;
 import com.longyb.mylive.server.rtmp.messages.SetChunkSize;
-
-import static com.longyb.mylive.server.rtmp.Constants.*;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -23,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class ChunkDecoder extends ReplayingDecoder<DecodeState> {
-
+	private static Logger log = LoggerFactory.getLogger(ChunkDecoder.class);
 	// changed by client command
 	int clientChunkSize = 128;
 
@@ -122,17 +129,20 @@ public class ChunkDecoder extends ReplayingDecoder<DecodeState> {
 		int fmt = (firstByte & 0xff) >> 6;
 		int csid = (firstByte & 0x3f);
 
-		if (csid == 0) {
+		if (csid == 0) {//CSID=0表示Basic Header块基本头占用 2 个字节，并且CSID范围在64-319 之间(第二个字节+64(2-63使用1字节表示法，2字节表示法就不需要再表示这些))；
 			// 2 byte form
 			csid = in.readByte() & 0xff + 64;
 			headerLength += 1;
-		} else if (csid == 1) {
+		} else if (csid == 1) {//CSID=1 表示Basic Header块基本头占用3个字节，并且ID范围在64-65599之间(第三个字节*256 + 第二个字节 + 64(2-63使用1字节表示法，3字节表示法就不需要再表示这些))。
 			// 3 byte form
 			byte secondByte = in.readByte();
 			byte thirdByte = in.readByte();
 			csid = (thirdByte & 0xff) << 8 + (secondByte & 0xff) + 64;
 			headerLength += 2;
 		} else if (csid >= 2) {
+			//CSID=2 表示该 chunk 是控制信息和一些命令信息，为低版本协议保留的。
+			//CSID=3-63 范围内的值表示整个流ID(有效ID)。
+			
 			// that's it!
 		}
 

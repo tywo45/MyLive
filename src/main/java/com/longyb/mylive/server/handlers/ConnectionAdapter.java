@@ -1,5 +1,8 @@
 package com.longyb.mylive.server.handlers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 public class ConnectionAdapter extends ChannelInboundHandlerAdapter {
+	private static Logger log = LoggerFactory.getLogger(ConnectionAdapter.class);
 
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {

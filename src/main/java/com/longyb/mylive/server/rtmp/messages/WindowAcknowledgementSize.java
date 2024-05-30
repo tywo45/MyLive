@@ -17,6 +17,19 @@ import lombok.NoArgsConstructor;
 public class WindowAcknowledgementSize extends RtmpControlMessage {
 	int windowSize;
 
+	public int getWindowSize() {
+		return windowSize;
+	}
+
+	public void setWindowSize(int windowSize) {
+		this.windowSize = windowSize;
+	}
+
+	public WindowAcknowledgementSize(int windowSize) {
+		super();
+		this.windowSize = windowSize;
+	}
+
 	@Override
 	public ByteBuf encodePayload() {
 		return Unpooled.buffer(4).writeInt(windowSize);

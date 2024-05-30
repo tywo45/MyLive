@@ -29,6 +29,14 @@ public class RtmpCommandMessage extends RtmpMessage {
 
 	}
 
+	public List<Object> getCommand() {
+		return command;
+	}
+
+	public void setCommand(List<Object> command) {
+		this.command = command;
+	}
+
 	@Override
 	public ByteBuf encodePayload() {
 		ByteBuf buffer = Unpooled.buffer();
@@ -40,5 +48,10 @@ public class RtmpCommandMessage extends RtmpMessage {
 	public int getMsgType() {
 		return Constants.MSG_TYPE_COMMAND_AMF0;
 
+	}
+
+	public RtmpCommandMessage(List<Object> command) {
+		super();
+		this.command = command;
 	}
 }

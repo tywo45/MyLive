@@ -20,6 +20,14 @@ public class UserControlMessageEvent extends RtmpMessage {
 	short eventType;
 	int data;
 
+	
+
+	public UserControlMessageEvent(short eventType, int data) {
+		super();
+		this.eventType = eventType;
+		this.data = data;
+	}
+
 	@Override
 	public ByteBuf encodePayload() {
 		ByteBuf buffer = Unpooled.buffer(6);

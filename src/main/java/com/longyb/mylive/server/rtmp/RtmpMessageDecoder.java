@@ -4,9 +4,21 @@ package com.longyb.mylive.server.rtmp;
 2019年12月16日 下午3:44:48
 **/
 
-import static com.longyb.mylive.server.rtmp.Constants.*;
+import static com.longyb.mylive.server.rtmp.Constants.MSG_ABORT_MESSAGE;
+import static com.longyb.mylive.server.rtmp.Constants.MSG_ACKNOWLEDGEMENT;
+import static com.longyb.mylive.server.rtmp.Constants.MSG_SET_CHUNK_SIZE;
+import static com.longyb.mylive.server.rtmp.Constants.MSG_SET_PEER_BANDWIDTH;
+import static com.longyb.mylive.server.rtmp.Constants.MSG_TYPE_AUDIO_MESSAGE;
+import static com.longyb.mylive.server.rtmp.Constants.MSG_TYPE_COMMAND_AMF0;
+import static com.longyb.mylive.server.rtmp.Constants.MSG_TYPE_DATA_MESSAGE_AMF0;
+import static com.longyb.mylive.server.rtmp.Constants.MSG_TYPE_VIDEO_MESSAGE;
+import static com.longyb.mylive.server.rtmp.Constants.MSG_USER_CONTROL_MESSAGE_EVENTS;
+import static com.longyb.mylive.server.rtmp.Constants.MSG_WINDOW_ACKNOWLEDGEMENT_SIZE;
 
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.longyb.mylive.amf.AMF0;
 import com.longyb.mylive.server.handlers.RtmpHeader;
@@ -27,6 +39,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class RtmpMessageDecoder {
+	private static Logger log = LoggerFactory.getLogger(RtmpMessageDecoder.class);
 
 	private RtmpMessageDecoder() {
 

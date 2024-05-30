@@ -26,6 +26,14 @@ public class VideoMessage extends RtmpMediaMessage {
 		return Unpooled.wrappedBuffer(videoData);
 	}
 
+	public byte[] getVideoData() {
+		return videoData;
+	}
+
+	public void setVideoData(byte[] videoData) {
+		this.videoData = videoData;
+	}
+
 	@Override
 	public int getOutboundCsid() {
 
